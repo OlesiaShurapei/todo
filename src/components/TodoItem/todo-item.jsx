@@ -1,16 +1,24 @@
 import "./todo-item.css";
-
-const TodoItem = ({ id, name, todos, setTodos }) => {
-  const onDeleteButton = (e) => {
+import { useState } from "react";
+import { Checkbox, Button } from "@mui/material";
+const TodoItem = ({ id, name, completed, todos, setTodos }) => {
+  const [checked, setChecked] = useState(completed);
+  const onDeleteButton = () => {
     const filteredTodos = todos.filter((todo) => todo.id !== id);
-    setTodos([...filteredTodos]);
+    setTodos(filteredTodos);
   };
+
   return (
     <div className="todo-item">
-      <span>{name}</span>
-      <button className="delete-button" onClick={onDeleteButton}>
-        удалить
-      </button>
+      <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
+      <span className={`todo-name ${checked ? "completed" : ""}`}>{name}</span>
+      <Button
+        variant="contained"
+        // startIcon={<DeleteIcon />}
+        onClick={onDeleteButton}
+      >
+        Delete
+      </Button>
     </div>
   );
 };

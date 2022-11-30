@@ -4,17 +4,16 @@ import "./todos.css";
 const Todos = ({ todos, setTodos }) => {
   return (
     <div className="todos">
-      {Array.isArray(todos) &&
-        todos.length > 0 &&
-        todos.map((todo, index) => (
-          <TodoItem
-            key={index}
-            id={todo.id}
-            todos={todos}
-            setTodos={setTodos}
-            name={todo.name}
-          />
-        ))}
+      {todos.map((todo, index) => (
+        <TodoItem
+          key={index}
+          id={todo.id}
+          todos={todos}
+          setTodos={setTodos}
+          name={todo.name}
+          completed={todo.completed}
+        />
+      ))}
     </div>
   );
 };
